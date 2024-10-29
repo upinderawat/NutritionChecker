@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdditiveRepository extends JpaRepository<Additive, Integer> {
+    Additive findByAdditiveId(Integer additiveId);
 }
-

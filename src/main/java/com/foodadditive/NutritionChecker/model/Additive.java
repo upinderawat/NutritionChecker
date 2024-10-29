@@ -1,41 +1,78 @@
 package com.foodadditive.NutritionChecker.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-
 import jakarta.persistence.*;
-import java.util.List;
 
-@Data
 @Entity
 @Table(name = "additives")
 public class Additive {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer additiveId;
+    @Column(name = "additive_id")
+    private int additiveId;
 
+    @Column(nullable = false)
     private String name;
-    private String eNumber;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "e_number")
+    private String eNumber;
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    @JsonIgnore
-    private Class classes;
+    private AdditiveClass additiveClass;
 
-    private String status;
-
-    @Column(columnDefinition = "TEXT")
     private String notes;
 
-    @OneToMany(mappedBy = "additive", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<AdditiveApproval> approvals;
+    // Constructor
+    public Additive() {}
 
-    @OneToMany(mappedBy = "additive", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<AdditiveUsage> usages;
+    // Getters and Setters
+    public int getAdditiveId() {
+        return additiveId;
+    }
+
+    public void setAdditiveId(int additiveId) {
+        this.additiveId = additiveId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getENumber() {
+        return eNumber;
+    }
+
+    public void setENumber(String eNumber) {
+        this.eNumber = eNumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public AdditiveClass getAdditiveClass() {
+        return additiveClass;
+    }
+
+    public void setAdditiveClass(AdditiveClass additiveClass) {
+        this.additiveClass = additiveClass;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
